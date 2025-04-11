@@ -40,7 +40,7 @@ namespace WordScramble
                 string[] fileWords = File.ReadAllLines(filePath);
                 foreach (string word in fileWords)
                 {
-                    string transformedWord = word.Transform(To.TitleCase);
+                    string transformedWord = word.Transform(To.UpperCase);
                     // ////////// => TO IMPLEMENT <= //////////// //DONE!!!
                     words.Add(transformedWord);
                 }
