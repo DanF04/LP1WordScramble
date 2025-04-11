@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using Spectre.Console;
 
 namespace WordScramble
@@ -24,7 +25,9 @@ namespace WordScramble
         /// </summary>
         public Game()
         {
-            // ////////// => TO IMPLEMENT <= //////////// //
+            wordProvider = new WordProvider();
+            gameStats = new GameResult[5];
+            // ////////// => TO IMPLEMENT <= //////////// //DONE!!!
         }
 
         /// <summary>
@@ -51,10 +54,12 @@ namespace WordScramble
                 switch (choice)
                 {
                     case "Start Game":
-                        // ////////// => TO IMPLEMENT <= //////////// //
+                        StartGame();
+                        // ////////// => TO IMPLEMENT <= //////////// //DONE!!!
                         break;
                     case "View Game Stats":
-                        // ////////// => TO IMPLEMENT <= //////////// //
+                        ShowGameStats();
+                        // ////////// => TO IMPLEMENT <= //////////// //DONE!!!
                         break;
                     case "Quit":
                         return;
@@ -79,12 +84,14 @@ namespace WordScramble
             /// <summary>
             /// The randomly chosen word for the current round.
             /// </summary>
-            string word = // ////////// => TO IMPLEMENT <= //////////// //
+            string word = new WordProvider().GetRandomWord();
+            // ////////// => TO IMPLEMENT <= //////////// //DONE!!!
 
             /// <summary>
             /// The scrambled version of the word.
             /// </summary>
-            string scrambledWord = // ////////// => TO IMPLEMENT <= //////////// //
+            string scrambledWord = new WordProvider().GetScrambledWord(word);
+            // ////////// => TO IMPLEMENT <= //////////// //DONE!!!
 
             AnsiConsole.Clear();
             AnsiConsole.MarkupLine("[bold green]Unscramble the word:[/]");
@@ -105,7 +112,8 @@ namespace WordScramble
             /// <summary>
             /// Checks if the player's guess is correct.
             /// </summary>
-            bool isCorrect = // ////////// => TO IMPLEMENT <= //////////// //
+            bool isCorrect = userInput == word;
+            // ////////// => TO IMPLEMENT <= //////////// //DONE!!!
 
             if (isCorrect)
             {
@@ -116,11 +124,13 @@ namespace WordScramble
                 // Shift existing entries
                 for (int i = gameStats.Length - 1; i > 0; i--)
                 {
-                    // ////////// => TO IMPLEMENT <= //////////// //
+                    gameStats[i] = gameStats[i - 1];
+                    // ////////// => TO IMPLEMENT <= //////////// //DONE!!!
                 }
 
                 // Add new result at the beginning
-                gameStats[0] = // ////////// => TO IMPLEMENT <= //////////// //
+                gameStats[0] = new GameResult(word,timeTaken);
+                // ////////// => TO IMPLEMENT <= //////////// //DONE!!!
             }
             else
             {
@@ -154,14 +164,12 @@ namespace WordScramble
 
             for (int i = 0; i < gameStats.Length; i++)
             {
-                if (gameStats[i] == null)
-                {
-                    // ////////// => TO IMPLEMENT <= //////////// //
-                }
-                
+                if (gameStats[i] == null) break;
+                table.AddRow($"{i+1}", $"{gameStats[i]:F2}", $"{gameStats[i]}%", $"{gameStats[i].TimeTaken:F2}");
+                // ////////// => TO IMPLEMENT <= //////////// //DONE!!!
                 // Add row to table
                 // Table.AddRow() only accepts strings
-                // ////////// => TO IMPLEMENT <= //////////// //
+                // ////////// => TO IMPLEMENT <= //////////// //DONE!!!
             }
 
             AnsiConsole.Write(table);
