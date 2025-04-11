@@ -112,6 +112,7 @@ namespace WordScramble
             /// <summary>
             /// Checks if the player's guess is correct.
             /// </summary>
+            userInput = userInput.ToUpper();
             bool isCorrect = userInput == word;
             // ////////// => TO IMPLEMENT <= //////////// //DONE!!!
 
@@ -164,9 +165,14 @@ namespace WordScramble
 
             for (int i = 0; i < gameStats.Length; i++)
             {
-                if (gameStats[i] == null) break;
-                table.AddRow($"{i+1}", $"{gameStats[i]:F2}", $"{gameStats[i]}%", $"{gameStats[i].TimeTaken:F2}");
-                // ////////// => TO IMPLEMENT <= //////////// //DONE!!!
+                if (gameStats[i] == null)
+                {
+                    break;
+                    // ////////// => TO IMPLEMENT <= //////////// //DONE!!!
+                }
+
+
+                table.AddRow($"{i+1}", $"{gameStats[i].Word}", $"{gameStats[i].TimeTaken:F2}");
                 // Add row to table
                 // Table.AddRow() only accepts strings
                 // ////////// => TO IMPLEMENT <= //////////// //DONE!!!
